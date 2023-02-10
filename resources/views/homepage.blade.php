@@ -1,28 +1,37 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('layouts.app')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@section('title', 'Trains')
 
-    <title>homepage</title>
+@section('main-content')
+    <div class="container">
+        <div class="row">
 
-    <!-- Fonts -->
-    <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <!-- Styles -->
-    @vite('resources/js/app.js')
-
-</head>
-
-<body>
-
-    <main>
-        <h1>
-            Trains
-        </h1>
-    </main>
-
-</body>
-
-</html>
+            @forelse ($trains as $train)
+                <div class="col-3">
+                    <div class="card p-3 mb-3">
+                        <p>
+                            Company: {{ $train->company }}
+                        </p>
+                        <p>
+                            Train: {{ $train->train_code }}
+                        </p>
+                        <p>
+                            From: {{ $train->departure_station }}
+                        </p>
+                        <p>
+                            To: {{ $train->arrival_station }}
+                        </p>
+                        <p>
+                            Arrival time: {{ $train->time_of_arrival }}
+                        </p>
+                    </div>
+                </div>
+            @empty
+                <p>
+                    Non ci sono treni in arrivo
+                </p>
+            @endforelse ()
+            
+        </div>
+    </div>
+@endsection
